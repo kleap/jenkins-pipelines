@@ -1,0 +1,23 @@
+{
+  "name": "@kleap/jenkins",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mkdir build&& copy index.html build\\index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kleap/jenkins-pipelines.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kleap/jenkins-pipelines/issues"
+  },
+  "homepage": "https://github.com/kleap/jenkins-pipelines#readme",
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
