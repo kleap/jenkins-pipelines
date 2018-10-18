@@ -5,7 +5,7 @@ pipeline {
             steps {
                 bat 'node --version'
                 bat 'yarn'
-                bat 'yarn build'
+                bat 'mkdir build && copy index.html build\\index.html'
             }
         }
     }
