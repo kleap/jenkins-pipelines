@@ -5,9 +5,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'node --version'
-                bat 'yarn'
-                bat 'rmdir build&& mkdir build && copy index.html build\\index.html'
+                sh 'node --version'
+                sh 'yarn'
             }
         }
     }
