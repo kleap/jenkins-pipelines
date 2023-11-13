@@ -24,7 +24,7 @@ jobs:
         run: |
           # Create a temporary branch for merging changes
           git checkout -b hotfix/${{github.sha}}
-          git rebase ${{github.ref_name}}
+          git rebase origin/${{github.ref_name}}
           git push origin hotfix/${{github.sha}}
 
       - name: Push and Create Pull Request with GH CLI
