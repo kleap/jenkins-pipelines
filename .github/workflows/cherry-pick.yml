@@ -23,7 +23,7 @@ jobs:
         run: |
           # Create a temporary branch for merging changes
           git checkout -b hotfix/${{github.sha}}
-          git cherry-pick ${{github.sha}}
+          git cherry-pick --skip ${{github.sha}}
           git push origin hotfix/${{github.sha}}
 
       - name: Push and Create Pull Request with GH CLI
