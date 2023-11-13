@@ -5,6 +5,8 @@ on:
     branches:
       - "staging_v*"
 
+env:
+  GH_TOKEN: ${{ github.token }}
 jobs:
   cherry-pick:
     runs-on: ubuntu-latest
