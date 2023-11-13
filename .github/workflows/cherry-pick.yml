@@ -29,7 +29,6 @@ jobs:
 
       - name: Push and Create Pull Request with GH CLI
         run: |
-          git push origin temp-branch
           echo "Creating Pull Request using GitHub CLI"
           gh pr create \
             --title "Merging changes from staging_v*" \
