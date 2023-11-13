@@ -1,0 +1,38 @@
+name: Cherry-Pick to Dev Branch
+
+on:
+  push:
+    branches:
+      - "staging_v*"
+
+jobs:
+  cherry-pick:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          ref: "development"
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Fetch and Merge from Staging Branch
+        run: |
+          # Create a temporary branch for merging changes
+          git checkout -b hotfix/${{github.sha}}
+          git cherry-pick ${{github.sha}}
+          git push origin hotfix/${{github.sha}}
+
+      - name: Push and Create Pull Request with GH CLI
+        run: |
+          git push origin temp-branch
+          echo "Creating Pull Request using GitHub CLI"
+          gh pr create \
+            --title "Merging changes from staging_v*" \
+            --body "This PR merges changes from the staging_v* branch." \
+            --repo ${{ github.repository }} \
+            --base development \
+            --head hotfix/${{github.sha}}
