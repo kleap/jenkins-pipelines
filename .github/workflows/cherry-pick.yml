@@ -22,6 +22,11 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
+      - name: Get Commit Author
+        id: get_author
+        run: |
+          echo ::set-output name=AUTHOR::$(git --no-pager log -1 --pretty="%an")
+
       - name: Fetch and Merge from Staging Branch
         run: |
           # Create a temporary branch for merging changes
@@ -32,9 +37,11 @@ jobs:
       - name: Push and Create Pull Request with GH CLI
         run: |
           echo "Creating Pull Request using GitHub CLI"
-          gh pr create \
+          PR_URL=$(gh pr create \
             --title "Merging changes from staging_v*" \
             --body "This PR merges changes from the staging_v* branch." \
             --repo ${{ github.repository }} \
             --base development \
-            --head hotfix/${{github.sha}}
+            --head hotfix/${{github.sha}} \
+            --silent)
+          gh pr edit "$PR_URL" --add-reviewer "${{ steps.get_author.outputs.AUTHOR }}"
